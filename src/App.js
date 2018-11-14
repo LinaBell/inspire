@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Header from './components/Header'
-import ScoreSummary from './components/ScoreSummary'
-import DailyUsage from './components/DailyUsage'
+import SignUp from './components/SignUp'
 import { pages } from './constants/pages';
 
 class App extends Component {
@@ -23,11 +22,7 @@ class App extends Component {
       <div>
         <Header activePage={this.state.activePage} setActivePage={this.setActivePage} />
         <div className="page-container">
-          {this.state.activePage === pages.summary ?
-            <ScoreSummary />
-            : 
-            <DailyUsage />
-          }
+          <SignUp />
         </div>
       </div>
     );

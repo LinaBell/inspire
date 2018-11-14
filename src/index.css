@@ -1,16 +1,17 @@
-@import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,700,600);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700,600);
+@import url(https://fonts.googleapis.com/css?family=Merriweather:400,700,600);
 
 body {
   margin: 0;
   padding: 0;
-  font-family: "Titillium Web", sans-serif;
-  font-size: 16px;
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 1rem;
   background: #f5f5f5;
-  color: #555;
-  font-weight: 500;
+  color: #212529;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: "Titillium Web", sans-serif;
+  line-height: 28px;
 }
 
 * {
@@ -25,9 +26,11 @@ body {
 
 .header {
   width: 100%;
-  box-shadow: 1px 1px 1px #ccc;
+  border-bottom: 1px solid #ccc;
   padding: 0 20px;
   background: #fff url(assets/images/logo.svg) 30px 10px no-repeat;
+  min-height: 52px;
+  display: block;
 }
 .header span {
   color: #333;
@@ -45,6 +48,13 @@ a {
   text-decoration: none;
   display: inline-block;
 }
+h1 {
+  font-family: Merriweather, Georgia, serif;
+  font-size: 36px;
+  line-height: 44px;
+  margin: 10 0 20px;
+  font-weight: 400;
+}
 h2 {
   font-size: 34px;
   color: #333;
@@ -58,9 +68,15 @@ h4 {
   color: #777;
   font-weight: inherit;
 }
+h5 {
+  font-weight: 400;
+}
 
 .text-bold {
   font-weight: bold;
+}
+.text-normal {
+  font-weight: 400;
 }
 .text-right {
   text-align: right;
@@ -98,11 +114,205 @@ h4 {
 
 /* colors */
 .pink {
-  background: #EF1F84;
+  background: #e6168b;
 }
 .orange {
   background: #FE8874;
 }
+.text-white {
+  color: white !important;
+}
+.text-muted {
+  color: #6c757d !important;
+}
+.text-primary {
+  color: #e6168b;   
+}
+.bg-gradient-fuschia {
+  background-image: linear-gradient(to right, #e6168b 0%, #ffaa67 100%);
+  background-repeat: repeat-x;
+  border-left-color: #e6168b;
+  border-right-color: #ffaa67;
+}
+.bg-gradient-gumbo {
+  background-image: linear-gradient(to right, #819ca7 0%, #f6f8f9 100%);
+  background-repeat: repeat-x;
+  border-left-color: #819ca7;
+  border-right-color: #f6f8f9;
+}
+
+
+.loading-spinner {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+/* utility billing demo copied css */
+.steps-container {
+  width: 100%;
+  background: white;
+  height: 60px;
+  position: relative;
+}
+.steps-container ol {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-left: 1.5rem;
+}
+.steps-container li {
+  margin-right: 3rem;
+  display: inline-block;
+}
+.rounded-circle {
+  background-color: #e6168b;    
+  border-radius: 50%;
+  margin-right: 1rem;
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  display: inline-block;
+  padding: 1px;
+}
+
+.signup-container{
+  min-height: 400px;
+  margin: auto;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 550px;
+  background: white;
+  box-shadow: 0 3px 24px 0 rgba(0,0,0,0.15);
+  border-radius: calc(0.5rem - 1px) calc(0.5rem - 1px);
+}
+.signup-header {
+  background-image: linear-gradient(to right, #ffaa67 0%, #fff5a5 100%);
+  background-repeat: repeat-x;
+  padding: 3rem;
+  font-size: 1.3125rem;
+}
+.signup-form {
+  padding: 30px 40px;
+}
+.signup-form span {
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 3px;
+  font-size: 11px;
+}
+.signup-form .login {
+  margin: 25px 0;
+  padding-top: 15px;
+  border-top: 1px solid #e6168b;
+}
+.signup-form .login input { 
+  display: block;
+  margin: 5px 0 10px;
+  width: 100%;
+  padding: 12px; 
+  color: hsl(0,0%,50%);
+  font-size: 13px;
+  border-radius: 5px 5px 5px 5px;
+  border: 1px solid #ccc;
+}
+.signup-form .submit-btn {
+  padding: 0.375rem 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 20px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.offer-card-container {
+  width: 800px;
+  margin: auto;
+}
+.offer-card {
+  width: 340px;
+  min-height: 680px;
+  margin: 30px;
+  padding-bottom: 80px;
+  float: left;
+  background: white;
+  box-shadow: 0 3px 24px 0 rgba(0,0,0,0.15);
+  border-radius: calc(0.5rem - 1px) calc(0.5rem - 1px);
+  position: relative;
+}
+.offer-card-header.featured {
+  padding: 20px 0;
+  margin-bottom: 30px;
+  border-radius: calc(0.5rem - 1px) calc(0.5rem - 1px) 0 0;
+}
+.offer-card-header.featured span {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 11px;
+}
+.offer-card-header {
+  padding: 30px 0;
+  margin-bottom: 20px;
+}
+.offer-card-header h2, .offer-card-header h3 {
+  font-weight: 400 !important;
+}
+.offer-card-header .bg-gradient-gumbo {
+  display: block;
+  height: 10px;
+  margin: -30px 0 40px;
+  border-radius: calc(0.5rem - 1px) calc(0.5rem - 1px) 0 0;
+}
+.offer-card-details h2, .offer-card-details h5 {
+  display: inline;
+  vertical-align: top;
+  padding: 2px;
+}
+.offer-type {
+  margin: 40px 0 20px 0;
+  background: #f5f5f5;
+  text-transform: uppercase;
+  font-size: 13px;
+  padding: 6px 0;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #777;
+}
+.offer-card li {
+  list-style: none;
+  font-size: 13px;
+  padding: 10px 20px;
+  line-height: 20px;
+}
+.offer-card .submit-btn {
+  padding: 0.375rem 1.5rem;
+  border-radius: 20px;
+  border: 1px solid #e6168b;
+  color: #e6168b;
+  cursor: pointer;
+  display: inline-block;
+  position: absolute; 
+  bottom: 20px;
+  left: 95px;
+}
+
+.usage-stat {
+  display: inline-block;
+  background: white;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 5px 5px 5px 5px;
+  width: 30%;
+}
+
 
 
 
@@ -125,3 +335,4 @@ h4 {
     margin: 20px 0; 
   }
 }
+
