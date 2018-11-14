@@ -71,6 +71,12 @@ h4 {
 h5 {
   font-weight: 400;
 }
+h6 {
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 3px;
+  font-size: 11px;
+}
 
 .text-bold {
   font-weight: bold;
@@ -235,12 +241,12 @@ h5 {
 
 .offer-card-container {
   width: 800px;
-  margin: auto;
+  margin: 0 auto 100px;
 }
 .offer-card {
   width: 340px;
-  min-height: 680px;
-  margin: 30px;
+  min-height: 600px;
+  margin: 30px 30px 100px;
   padding-bottom: 80px;
   float: left;
   background: white;
@@ -271,13 +277,19 @@ h5 {
   margin: -30px 0 40px;
   border-radius: calc(0.5rem - 1px) calc(0.5rem - 1px) 0 0;
 }
-.offer-card-details h2, .offer-card-details h5 {
+.offer-card-details {
+  padding: 20px;
+}
+.offer-card-body h2, .offer-card-body h5 {
   display: inline;
   vertical-align: top;
   padding: 2px;
 }
+.offer-card-details {
+  padding: 20px;
+}
 .offer-type {
-  margin: 40px 0 20px 0;
+  margin: 30px 0 0 0;
   background: #f5f5f5;
   text-transform: uppercase;
   font-size: 13px;
@@ -289,7 +301,7 @@ h5 {
 .offer-card li {
   list-style: none;
   font-size: 13px;
-  padding: 10px 20px;
+  padding: 10px 0;
   line-height: 20px;
 }
 .offer-card .submit-btn {
@@ -300,8 +312,12 @@ h5 {
   cursor: pointer;
   display: inline-block;
   position: absolute; 
-  bottom: 20px;
+  bottom: 25px;
   left: 95px;
+}
+.offer-card-footer {
+  position: absolute;
+  bottom: -80px;
 }
 
 .usage-stat {

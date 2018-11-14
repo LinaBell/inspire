@@ -10,14 +10,14 @@ export default class LoadingSpinner extends React.PureComponent {
                         {this.props.text}
                     </div>
                     <div className="loading-spinner">
-                        <img src={loading} />
+                        <img src={loading} alt="loading..." />
                     </div>
                 </div>
             )
         } else {
             return (
                 <div className="loading-spinner">
-                    <img src={loading} />
+                    <img src={loading} alt="loading..." />
                 </div>
             )
         }

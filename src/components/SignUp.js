@@ -1,30 +1,8 @@
 import React from 'react'
-import Select from 'react-select'
-import OfferCard from './OfferCard'
 import LoadingSpinner from './LoadingSpinner'
-
-const options = [
-  { value: 'Southern California Edison', label: 'Southern California Edison' },
-  { value: 'Los Angeles Department of Water and Power', label: 'Los Angeles Department of Water and Power' },
-  { value: 'Pacific Gas and Electric Company', label: 'Pacific Gas and Electric Company' }
-]
-
-const details1 = <ul>
-  <li>12 month flat supply price</li>
-  <li>Amazon Echo Dot</li>
-  <li>Clean Energy</li>
-  <li>100% National Wind</li>
-  <li>Early Cancellation Fee: $10 for each remaining month of your contract</li>
-  <li>Energy efficient smart devices available</li>
-  <li className="text-bold">By choosing this plan you could provide clean power, light, and internet to a child in need!</li>
-</ul>
-const details2 = <ul>
-  <li>36 month fixed supply rate</li>
-  <li>Amazon Echo Dot</li>
-  <li>Clean Energy</li>
-  <li>100% National Wind</li>
-  <li>1% cash back after 12 months</li>
-</ul>
+import SignupForm from './SignupForm'
+import OfferCardsContainer from './OfferCardsContainer'
+import SignUpSuccess from './SignUpSuccess'
 
 export default class SignUp extends React.Component {
   constructor(props) {
@@ -36,26 +14,19 @@ export default class SignUp extends React.Component {
       rate: 0,
       averageBill: 0,
       averageUsage: 0,
-      login: '',
-      password: ''
+      login: 'asdfasdf',
+      password: 'asdfasd'
     }
   }
   
-  handleChange = (selectedOption) => {
+  handleSelectChange = (selectedOption) => {
     this.setState({ selectedOption: selectedOption })
     console.log(`Option selected:`, selectedOption)
   }
 
-	handleSubmit = () => {
-    this.setState({
-      isLoading: true
-    })
-    console.log(this.state.isLoading)
-		// let username = this.refs.username.value
-    // let password = this.refs.password.value
-		// this.refs.username.value = '';
-    // this.refs.password.value = '';
-    
+	handleSubmitSignupForm = () => {
+    this.setState({isLoading: true})
+
     fetch('http://localhost:3100/utilities/usage')
       .then((res) => res.json() )
       .then((data) => {
@@ -67,11 +38,12 @@ export default class SignUp extends React.Component {
           averageUsage: data.averageUsage
         })
       })
-      .catch((error) => console.log('Oops! . There Is A Problem') )
+      .catch((error) => console.log('Oops! There was a problem getting usage.') )
   }
 
   handleOnSelelct = () => {
     this.setState({isLoading: true})
+
     fetch('http://localhost:3100/utilities/register')
       .then((res) => res.json() )
       .then((data) => {
@@ -82,78 +54,75 @@ export default class SignUp extends React.Component {
           password: data.password
         })
       })
-      .catch((error) => console.log('Oops! . There Is A Problem') )
-  }
-
-  renderSignupForm() {
-    return (
-      <div className="signup-container">
-        <div className="signup-header text-center">
-          It looks like you're in California!
-        </div>
-        <div className="signup-form">
-          <span>Select a Provider</span>
-          <br />
-          <Select
-            value={this.state.selectedOption}
-            onChange={this.handleChange}
-            options={options}
-          />
-          <div className="login">
-            <span>Login</span>
-            <input type="text" ref="username" placeholder="Username" />  
-            <input type="password" ref="password" placeholder="Password" />  
-          </div>
-          <div className="text-center">
-            <div onClick={this.handleSubmit.bind(this)} className="submit-btn bg-gradient-fuschia text-white">
-              Explore plan options →
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  renderOfferCards() {
-    return(
-      <div className="offer-card-container text-center">
-        <h1>Great News!</h1>
-        <br />
-        <h3 className="text-normal">You could prevent 58,625 pounds of coal from being burned per year.</h3>
-        <br />
-        <div className="usage-stat">
-          <span className="font-bold">Current Rate:</span> {this.state.rate}¢/kWh
-        </div>
-        <div className="usage-stat">
-          <span className="font-bold">Average Usage:</span> {this.state.averageUsage} kWh/mo
-        </div>
-        <div className="usage-stat">
-          <span className="font-bold">Average Bill:</span> ${this.state.averageBill} /mo
-        </div>
-        <OfferCard title="Inspire One" featured price="$139.99" details={details1} onSelect={this.handleOnSelelct.bind(this)} />
-        <OfferCard title="Clean & Green" price="$99.99" details={details2} onSelect={this.handleOnSelelct.bind(this)} />
-      </div>
-    )
+      .catch((error) => console.log('Oops! There was a problem registering') )
   }
   
   render() { 
-    let { isLoading, screen } = this.state
+    let { 
+      screen,
+      selectedOption, 
+      isLoading, 
+      rate,
+      averageBill,
+      averageUsage,
+      login,
+      password
+    } = this.state
+
     let content
     if(screen === 1 && isLoading) {
       content = <LoadingSpinner text="We're finding the best plan options for you!" displayContainer />
     } else if(screen === 1) {
-      content = this.renderSignupForm()
+      content = <SignupForm selectedOption={selectedOption} handleChange={this.handleSelectChange.bind(this)} handleSubmit={this.handleSubmitSignupForm.bind(this)} />
     } else if(screen === 2 && isLoading) {
       content = <LoadingSpinner />
     } else if(screen === 2) {
-      content = this.renderOfferCards()
+      content = <OfferCardsContainer rate={rate} averageBill={averageBill} averageUsage={averageUsage} />
     } else {
-      content = <div>{this.state.login} and {this.state.password}</div>
+      content = <SignUpSuccess login={login} password={password} />
     }
 
     return (
         <div>
-          {content}
+          <div className="steps-container text-center">
+            <ol className="d-sm-flex list-unstyled mb-0">
+              <li className="mb-1 mb-sm-0">
+                <div className="d-flex">
+                  <span className="text-center rounded-circle mr-3 bg-primary text-white">
+                    1
+                  </span>
+                  <span className={screen === 1 ? 'text-primary' : 'text-muted'}>
+                    Enter your info
+                  </span>
+                </div>
+              </li>
+          
+              <li className="mb-1 mb-sm-0">
+                <div className="d-flex">
+                  <span className="text-center rounded-circle text-white">
+                    2
+                  </span>
+                  <span className={screen === 2 ? 'text-primary' : 'text-muted'}>
+                    Pick plan
+                  </span>
+                </div>
+              </li>
+          
+              <li className="mb-1 mb-sm-0">
+                <div className="d-flex">
+                  <span className="text-center rounded-circle text-white">
+                    3
+                  </span>
+                  <span className={screen === 3 ? 'text-primary' : 'text-muted'}>
+                    Save the planet
+                  </span>
+                </div>
+              </li>
+            </ol>
+          </div>
+          <div className="page-container">
+            {content}
+          </div>
         </div>
       )
     }

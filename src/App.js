@@ -21,9 +21,7 @@ class App extends Component {
     return (
       <div>
         <Header activePage={this.state.activePage} setActivePage={this.setActivePage} />
-        <div className="page-container">
-          <SignUp />
-        </div>
+        <SignUp />
       </div>
     );
   }
