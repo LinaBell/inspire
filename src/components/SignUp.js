@@ -1,7 +1,7 @@
 import React from 'react'
-import Select from 'react-select';
-import loading from '../assets/images/loading.gif'
+import Select from 'react-select'
 import OfferCard from './OfferCard'
+import LoadingSpinner from './LoadingSpinner'
 
 const options = [
   { value: 'Southern California Edison', label: 'Southern California Edison' },
@@ -35,7 +35,9 @@ export default class SignUp extends React.Component {
       screen: 1,
       rate: 0,
       averageBill: 0,
-      averageUsage: 0
+      averageUsage: 0,
+      login: '',
+      password: ''
     }
   }
   
@@ -54,32 +56,33 @@ export default class SignUp extends React.Component {
 		// this.refs.username.value = '';
     // this.refs.password.value = '';
     
-    fetch('https://api.github.com/users/linabell')
+    fetch('http://localhost:3100/utilities/usage')
       .then((res) => res.json() )
       .then((data) => {
         this.setState({
           isLoading: false,
-          screen: 2
+          screen: 2,
+          rate: data.rate,
+          averageBill: data.averageBill,
+          averageUsage: data.averageUsage
         })
       })
       .catch((error) => console.log('Oops! . There Is A Problem') )
   }
 
   handleOnSelelct = () => {
-    console.log('handleOnSelelct')
-  }
-
-  renderLoadingSpinner() {
-    return (
-      <div className="signup-container">
-        <div className="signup-header text-center">
-          We're finding the best plan options for you!
-        </div>
-        <div className="loading-spinner">
-          <img src={loading} />
-        </div>
-      </div>
-    )
+    this.setState({isLoading: true})
+    fetch('http://localhost:3100/utilities/register')
+      .then((res) => res.json() )
+      .then((data) => {
+        this.setState({
+          isLoading: false,
+          screen: 3,
+          login: data.login,
+          password: data.password
+        })
+      })
+      .catch((error) => console.log('Oops! . There Is A Problem') )
   }
 
   renderSignupForm() {
@@ -136,12 +139,16 @@ export default class SignUp extends React.Component {
   render() { 
     let { isLoading, screen } = this.state
     let content
-    if(isLoading) {
-      content = this.renderLoadingSpinner()
+    if(screen === 1 && isLoading) {
+      content = <LoadingSpinner text="We're finding the best plan options for you!" displayContainer />
     } else if(screen === 1) {
       content = this.renderSignupForm()
-    } else {
+    } else if(screen === 2 && isLoading) {
+      content = <LoadingSpinner />
+    } else if(screen === 2) {
       content = this.renderOfferCards()
+    } else {
+      content = <div>{this.state.login} and {this.state.password}</div>
     }
 
     return (
