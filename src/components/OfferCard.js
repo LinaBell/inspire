@@ -21,7 +21,7 @@ const OfferCard = ({ title, featured, price, details, footerText, onSelect }) =>
       </div>
       <div className="offer-card-details">
         {details}
-        <div onClick={onSelect} className="submit-btn text-center ">
+        <div onClick={onSelect.bind(this)} className="submit-btn text-center ">
           Select this plan
         </div>
       </div>

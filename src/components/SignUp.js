@@ -10,7 +10,7 @@ export default class SignUp extends React.Component {
     this.state = {
       isLoading: false,
       selectedOption: null,
-      screen: 1,
+      screen: 2,
       rate: 0,
       averageBill: 0,
       averageUsage: 0,
@@ -77,7 +77,7 @@ export default class SignUp extends React.Component {
     } else if(screen === 2 && isLoading) {
       content = <LoadingSpinner />
     } else if(screen === 2) {
-      content = <OfferCardsContainer rate={rate} averageBill={averageBill} averageUsage={averageUsage} />
+      content = <OfferCardsContainer rate={rate} averageBill={averageBill} averageUsage={averageUsage} handleOnSelelct={this.handleOnSelelct.bind(this)} />
     } else {
       content = <SignUpSuccess login={login} password={password} />
     }
