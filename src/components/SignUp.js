@@ -10,7 +10,7 @@ export default class SignUp extends React.Component {
     this.state = {
       isLoading: false,
       selectedOption: null,
-      screen: 2,
+      screen: 1,
       rate: 0,
       averageBill: 0,
       averageUsage: 0,
